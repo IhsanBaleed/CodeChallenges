@@ -1,5 +1,5 @@
 #include "StringChallenges.hh"
-
+#include <iostream>
 
 
 // link: https://edabit.com/challenge/HipNbqHrErSYsM63T
@@ -62,3 +62,62 @@ std::string extendVowels(std::string word, int num) {
     return result;
 }
 
+
+// Link: https://edabit.com/challenge/mEEsMKznTCq25PWvD
+// Hard - 10 Mins
+
+std::string toCamelCase(std::string str) {
+
+    std::string result;
+    for (int i=0; i < str.length(); i++) {
+        char letter = str.at(i);
+        if (letter == '_') {
+            i++;
+            result += toupper(str.at(i));
+        }
+        else {
+            result += letter;
+        }
+    }
+
+    return result;
+}
+
+
+std::string toSnakeCase(std::string str) {
+    std::string result; 
+    for (int i=0; i < str.length(); i++) {
+        char letter = str.at(i);
+        if (isupper(letter)) {
+            result += "_";
+            result += tolower(letter);
+        }
+        else {
+            result += letter;
+        }
+    }
+
+    return result;
+	
+}
+
+
+std::vector<int> move_zeroes(const std::vector<int>& input) {
+    std::vector<int> new_vec(input.size());
+    int counter = 0;
+    
+    for (int i=0, j=0; i < input.size(); i++) {
+        if (input[i] == 0) {
+            counter++;
+            continue;
+        }
+        new_vec[j] = input[i];
+        j++;
+    }
+
+    while (counter > 0) {
+        new_vec[input.size()-counter] = 0;
+        counter --;
+    }
+  return new_vec;
+}
