@@ -5,9 +5,18 @@
 
 int main() {
 
+    // int stores = 4;
+    // int centres[] = {2, 3, 0, -4};
+    // long d = 22;
+    // int result = ware_house_locations(stores, centres, d);
 
-    std::vector<int> data = {1,0,0,2,4,5};
-    move_zeroes(data);
+    int n = 14;
+    char * requests = "aaaaacggtffrrd";
+    // char * requests = "abacadaeafag";
+    int minGap = 3;
 
+    rate_limit(n, requests, minGap);
     return 0;
 }
+
+

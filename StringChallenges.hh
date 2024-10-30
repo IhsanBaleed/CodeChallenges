@@ -15,3 +15,8 @@ std::string toCamelCase(std::string str);
 std::string toSnakeCase(std::string str);
 
 std::vector<int> move_zeroes(const std::vector<int>& input);
+
+int ware_house_locations(int stores, int* locations, long d);
+
+int rate_limit(int n, char* requests, int min_gap);
+
