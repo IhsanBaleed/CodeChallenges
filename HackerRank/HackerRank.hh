@@ -9,7 +9,7 @@ std::vector<int> mergeLists(std::vector<int> list1, std::vector<int> list2);
 
 int flippingMatrix(std::vector<std::vector<int>>matrix);
 
-void read_stdin() {
+inline void read_input() {
     for (std::string line; std::getline(std::cin, line);) {
         std::cout << line << std::endl;
     }
@@ -47,3 +47,4 @@ public:
 
 void editor_main();
 
+std::string caesarCipher(std::string s, int k);

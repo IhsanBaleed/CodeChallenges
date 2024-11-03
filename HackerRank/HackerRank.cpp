@@ -1,6 +1,7 @@
 #include "HackerRank.hh"
 
 #include <map>
+#include <cctype>
 
 int median(int size, int* arr) {
     if (size == 1) {
@@ -133,4 +134,28 @@ void editor_main() {
     }
 }
 
+std::string caesarCipher(std::string s, int k) {
 
+    std::string result = "";
+
+    for (auto letter : s) {
+        
+        if (isalpha(letter)) {
+            int asci_val = static_cast<int>(letter);
+            if(asci_val >=97 && asci_val + k > 122) {                
+                int letter_val = static_cast<int>('a') + (asci_val + k - 122) -1;
+                result += static_cast<char>(letter_val);
+            } else if (asci_val <= 90 && asci_val + k > 90)  {
+                int letter_val = static_cast<int>('A') + (asci_val + k - 90) -1;
+                result += static_cast<char>(letter_val);
+            } else {
+                letter +=k;
+                result += letter;
+            }
+
+        } else {
+            result += letter;
+        }
+    }
+    return result;
+}
