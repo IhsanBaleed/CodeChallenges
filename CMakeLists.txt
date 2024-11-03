@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Challenge)
 
-# add_subdirectory()
+add_subdirectory(Strings)
+add_subdirectory(HackerRank)
 
-add_executable(Challenge main.cpp
-                        StringChallenges.cpp)
 
-# target_link_libraries(Challenge PUBLIC )
+add_executable(Challenge main.cpp)
+
+target_link_libraries(Challenge PUBLIC HackerRank
+                                       Strings)
 

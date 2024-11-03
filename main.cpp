@@ -1,21 +1,21 @@
-#include <iostream>
+#include "HackerRank.hh"
 #include "StringChallenges.hh"
+
+#include <iostream>
 #include <vector>
+#include <cstring>
 
 
 int main() {
 
-    // int stores = 4;
-    // int centres[] = {2, 3, 0, -4};
-    // long d = 22;
-    // int result = ware_house_locations(stores, centres, d);
+    std::string str = "abacadaeafag";
+    char* data = new char[str.length() + 1];
+    std::strcpy(data, str.c_str());
 
-    int n = 14;
-    char * requests = "aaaaacggtffrrd";
-    // char * requests = "abacadaeafag";
-    int minGap = 3;
-
-    rate_limit(n, requests, minGap);
+    int size = 12;
+    int min_gap = 2;
+    
+    int result = rate_limit(size, data, min_gap);
     return 0;
 }
 

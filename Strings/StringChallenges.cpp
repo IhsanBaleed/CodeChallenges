@@ -168,52 +168,52 @@ bool empty_map(std::map<char, uint>& map) {
     return true;
 }
 
-int rate_limit(int n, char* requests, int min_gap) {
+int rate_limit(int n, char* input, int min_gap) {
 
-    if (min_gap == 0) {
-        return n;
-    }
+    int chars_recorded = 0;
 
-    std::map<char, uint> total_requests;
+    std::vector<char> result;
+    int result_index = 0;
 
-    for (int i=0; i<n; i++) {
-        if (total_requests.find(requests[i]) == total_requests.end()) {
-            total_requests.insert(std::make_pair(requests[i], 1));
-            continue;
-        } 
-        total_requests[requests[i]]++;
-    }
-
-    std::vector<char> new_data;
-
-    for (auto it = total_requests.begin(); it != total_requests.end(); ++it) {
-        int buffer = min_gap;
-
-        for (int i=0; i < it->second;) {
-            new_data.push_back(it->first);
-            it->second -=1;
-
-            auto next_it = it;
-            next_it++;
-
-            for (int j=0; j < min_gap && !empty_map(total_requests); j++) {
-                if (next_it == total_requests.end()) { // End of buffer chars
-                    new_data.push_back('-');
-                } else {
-                    new_data.push_back(next_it->first);
-                    next_it->second -= 1;
-                    char current_char = next_it->first;
-                    
-                    if(next_it->second == 0) {
-                        next_it++;
-                        total_requests.erase(current_char);
-                    } else {next_it++;}
+    while(chars_recorded < n) {
+        for (int input_ptr=0; input_ptr < n; input_ptr++) {
+            if (chars_recorded == n) {
+                break;
+            }
+            if (input[input_ptr] == '#') {
+                    if (input_ptr == n-1) {
+                    result.push_back('-');
+                    result_index++;
+                    break;
                 }
+                continue;
+            }
+
+            bool safe_to_insert = true;
+            int place_to_check = result_index - 1;
+            for (int gaps=0; gaps < min_gap; gaps++) {
+
+                if (place_to_check < 0)
+                    break;
+
+                if (input[input_ptr] == result[place_to_check]) {
+                    safe_to_insert = false;
+                    break;
+                }
+                place_to_check --;
+            }
+
+            if (safe_to_insert) {
+                result.push_back(input[input_ptr]);
+                result_index++;
+                chars_recorded++;
+                input[input_ptr] = '#';
+                continue;
             }
         }
     }
 
-    return new_data.size();
+    return result.size();
 }
 
 
