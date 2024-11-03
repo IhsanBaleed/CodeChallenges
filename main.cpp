@@ -8,14 +8,20 @@
 
 int main() {
 
-    std::string str = "abacadaeafag";
-    char* data = new char[str.length() + 1];
-    std::strcpy(data, str.c_str());
+    std::vector<std::vector<int>> vec = {
+        {112, 42, 83, 119},
+        {56, 125, 56, 49},
+        {15, 78, 101, 43},
+        {62, 98, 114, 108}
+    };
 
-    int size = 12;
-    int min_gap = 2;
-    
-    int result = rate_limit(size, data, min_gap);
+    std::vector<std::vector<int>> new_vec = {
+        {811, 2137},
+        {2904, 107}
+    };
+
+    int result = flippingMatrix(new_vec);
+
     return 0;
 }
 
