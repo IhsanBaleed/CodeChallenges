@@ -52,6 +52,11 @@ std::vector<int> mergeLists(std::vector<int> list1, std::vector<int> list2) {
 }
 
 int flippingMatrix(std::vector<std::vector<int>>matrix) {
+
+    if (matrix.size() == 1) {
+        return matrix[0][0];
+    }
+
     int result = 0;
     int n = matrix.size()/2;
     int row_max_index = n*2-1;
@@ -85,3 +90,47 @@ int flippingMatrix(std::vector<std::vector<int>>matrix) {
     return result;
 
 }
+
+void editor_main() {
+    std::string current_text;
+    TextHistory history(current_text);
+
+    for (std::string line; std::getline(std::cin, line);) {
+
+        char command = line.at(0);
+        std::string data;
+        if (line.size() > 2) {
+            data = line.substr(2);
+        }
+
+        switch (command) {
+
+            case '1': {
+                current_text += data;
+                history.push(current_text);
+                break;
+            }
+
+            case '2': {
+                int chars = std::stoi(data);
+                current_text.erase(current_text.size() - chars);
+                history.push(current_text);
+                break;
+            }
+
+            case '3': {
+                int index = std::stoi(data);
+                std::cout << current_text.at(index-1) << std::endl;
+                break;
+            }
+
+            case '4':  {
+                history.pop();
+                current_text = history.current_val();
+                break;
+            }
+        }
+    }
+}
+
+
