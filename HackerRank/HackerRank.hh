@@ -9,12 +9,6 @@ std::vector<int> mergeLists(std::vector<int> list1, std::vector<int> list2);
 
 int flippingMatrix(std::vector<std::vector<int>>matrix);
 
-inline void read_input() {
-    for (std::string line; std::getline(std::cin, line);) {
-        std::cout << line << std::endl;
-    }
-}
-
 class TextHistory {
 
     std::string history[100];
@@ -48,3 +42,12 @@ public:
 void editor_main();
 
 std::string caesarCipher(std::string s, int k);
+
+inline void read_input() {
+    for (std::string line; std::getline(std::cin, line);) {
+        std::cout << line << std::endl;
+    }
+}
+
+int superDigit(std::string n, int k);
+

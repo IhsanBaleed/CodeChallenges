@@ -159,3 +159,26 @@ std::string caesarCipher(std::string s, int k) {
     }
     return result;
 }
+
+
+int superDigit(std::string n, int k) {
+    
+    std::string base = n;
+    while (k > 1) {
+        n += base;
+        k--;
+    }
+    
+    long long  digit = std::stol(n);
+    
+    if (digit < 10) {
+        return digit;
+    } else {
+        long long total = 0;
+        for (auto val : n) {
+            total += val - '0';
+        }
+        return superDigit(std::to_string(total), k);
+    }
+}
+
