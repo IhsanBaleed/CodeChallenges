@@ -51,3 +51,4 @@ inline void read_input() {
 
 int superDigit(std::string n, int k);
 
+std::string gridChallenge(std::vector<std::string> grid);

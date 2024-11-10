@@ -182,3 +182,30 @@ int superDigit(std::string n, int k) {
     }
 }
 
+std::string gridChallenge(std::vector<std::string> grid) {
+    
+    for (auto &row : grid) {
+        for (int i=0; i<row.size(); i++) {
+            for (int j=i+1; j <row.size(); j++) {
+                if(row[i] > row[j]) {
+                    char temp = row[i];
+                    row[i] = row[j];
+                    row[j] = temp;
+                }
+            }
+        }  
+    }
+
+    for (int c=0; c<grid.size(); c++ ) {
+        for (int i=0; i < grid.size()-1; i++) {
+
+            if (grid[i].at(c) > grid[i+1].at(c)) {  
+                return "NO";
+            }
+        
+        }
+    }
+
+    return "YES";
+}
+
