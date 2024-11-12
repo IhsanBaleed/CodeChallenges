@@ -160,7 +160,6 @@ std::string caesarCipher(std::string s, int k) {
     return result;
 }
 
-
 int superDigit(std::string n, int k) {
     
     std::string base = n;
@@ -207,5 +206,66 @@ std::string gridChallenge(std::vector<std::string> grid) {
     }
 
     return "YES";
+}
+
+void minimumBribes(std::vector<int> q) {
+
+    int bribes=0;
+    int n=q.size();
+    //int i=0;
+    for(int i=0;i<n;i++){
+        if(q[i]>(i+1+2)){
+            std::cout << "Too chaotic" << std::endl;
+            return;
+        }
+        //else if(q[i]==i+1){continue;}
+        
+        for (int j = std::max(0, q[i] - 2); j < i; j++)
+            if (q[j] > q[i]) bribes++;
+        
+    }
+    std::cout << bribes << std::endl;
+
+}
+
+int truckTour(std::vector<std::vector<int>> petrolpumps) {
+
+    int fuel = 0;
+    int distance = 1;
+    int required_stations = petrolpumps.size();
+
+    for (int station = 0; station < petrolpumps.size(); station++) {
+        int tank = 0;
+        int total_visited_stations = 0;
+
+        if (petrolpumps[station][fuel] + tank - petrolpumps[station][distance] < 0) {
+            continue;
+        }
+
+        tank += petrolpumps[station][fuel] - petrolpumps[station][distance];
+        total_visited_stations++;
+
+        int next_station = station;
+        
+        while (total_visited_stations < required_stations) {
+            next_station++;
+
+            if (next_station == petrolpumps.size()) {
+                next_station = 0;
+            }
+
+            if (petrolpumps[next_station][fuel] + tank - petrolpumps[next_station][distance] < 0) {
+                break;
+            }
+
+            tank += petrolpumps[next_station][fuel] - petrolpumps[next_station][distance];
+            total_visited_stations++;
+        }
+
+        if (total_visited_stations == required_stations) {
+            return station;
+        }
+    }
+    return 0;
 }
 

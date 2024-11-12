@@ -52,3 +52,7 @@ inline void read_input() {
 int superDigit(std::string n, int k);
 
 std::string gridChallenge(std::vector<std::string> grid);
+
+void minimumBribes(std::vector<int> q);
+
+int truckTour(std::vector<std::vector<int>> petrolpumps);
