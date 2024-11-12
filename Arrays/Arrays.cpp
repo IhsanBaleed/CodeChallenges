@@ -1,5 +1,6 @@
 #include "Arrays.hh"
 #include <set>
+#include <vector>
 
 std::vector<int> SkyScrapper(std::vector<int> A_data) {
 
@@ -21,7 +22,6 @@ std::vector<int> SkyScrapper(std::vector<int> A_data) {
             result.push_back(A_data[i]);
         }
     }
-
     return result;
 }
 
@@ -48,4 +48,31 @@ int RemoveLetters(std::string S) {
         return odd_chars -1;
     }
     return 0;
+}
+
+int ReverseInt(int num) {
+
+    std::vector<int> digits;
+    int result = 0;
+
+    while (num > 0) {
+        int digit = num % 10;
+        if (digit == 0 && digits.size() == 0) {
+            num = num / 10;
+        }
+        else {
+            digits.push_back(num % 10);
+            num = num / 10;
+        }
+    }
+
+    int multiplier = 1;
+    for (auto digit : digits) {
+        result *= multiplier;
+        result += digit;
+        if (multiplier < 10) {
+            multiplier *= 10;
+        }
+    }
+    return result;
 }
