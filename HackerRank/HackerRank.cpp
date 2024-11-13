@@ -1,6 +1,7 @@
 #include "HackerRank.hh"
 
 #include <map>
+#include <set>
 #include <cctype>
 
 int median(int size, int* arr) {
@@ -268,4 +269,65 @@ int truckTour(std::vector<std::vector<int>> petrolpumps) {
     }
     return 0;
 }
+
+std::string isBalanced(std::string s) {
+
+    // you can use a stack to make it work,
+    // push the openning brackets, and pop when you get a closing one of the same type.
+    int processed_items = 0;
+
+    if (s.size() % 2 == 1) 
+        return "NO";
+  
+    for (int i=0; i<s.size()-1; i++) {
+        int jump = 0;
+        char val_at_i = s.at(i);
+
+        char target;
+        switch (val_at_i) {
+            case '(':
+                    target = ')';
+                break;
+            case '{':
+                    target = '}';
+                break;
+            case '[':
+                    target = ']';
+                break;
+            default:
+                continue;
+        }
+
+        for (int j=i+1; j < s.size(); j++) {
+            char val_at_j = s.at(j);
+
+            if (val_at_j == val_at_i) {
+                jump++;
+                continue;
+            }
+
+            if (target == s.at(j)) {
+                if (jump > 0) {
+                    jump --;
+                    continue;
+                } else {
+                    if ((j - i - 1) % 2 == 1) {
+                        return "NO";
+                    }
+                    processed_items += 2;
+                    break;
+                }
+            }
+ 
+        }
+    }
+
+    if (processed_items == s.size()) {
+        return "YES";
+    }
+    return "NO";
+
+}
+
+
 

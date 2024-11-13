@@ -56,3 +56,5 @@ std::string gridChallenge(std::vector<std::string> grid);
 void minimumBribes(std::vector<int> q);
 
 int truckTour(std::vector<std::vector<int>> petrolpumps);
+
+std::string isBalanced(std::string s);
