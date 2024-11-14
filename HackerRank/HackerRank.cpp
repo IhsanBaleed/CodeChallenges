@@ -359,3 +359,52 @@ int pairs(int k, std::vector<int> arr) {
     return result;
 }
 
+int cookies(int k, std::vector<int> A) {
+    int result = 0;
+    bool done = false;
+
+    while (!done) {
+        int cookie1 = 0; // lowest
+        int cookie2 = 0; // second_lowest
+
+        if (A.size() == 1 && A[cookie1] < k) {
+            return -1;
+        }
+
+        for (int i=0; i<A.size(); i++) {
+            if(A[i] > A[cookie2]) {
+                cookie2 = i;
+            }
+        }
+
+        for (int i=0; i<A.size(); i++) {
+            if (A[i] < k && A[i] < A[cookie1]) {
+                cookie1 = i;
+            }
+        }
+
+        for (int i=0; i<A.size(); i++) {
+             if (A[i] > A[cookie1] && A[i] < A[cookie2]) {
+                cookie2 = i;
+            }
+        }
+
+        if (A[cookie1] < k) {
+            int new_cookie = A[cookie1] + A[cookie2] * 2;
+            if (cookie1 > cookie2) {
+                A.erase(A.begin() + cookie1);
+                A.erase(A.begin() + cookie2);
+            } else {
+                A.erase(A.begin() + cookie2);
+                A.erase(A.begin() + cookie1);
+            }
+            A.push_back(new_cookie);
+            result ++;
+        } else {
+            break;
+        }
+    }
+
+    return result;
+}
+

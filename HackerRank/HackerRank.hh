@@ -60,3 +60,7 @@ int truckTour(std::vector<std::vector<int>> petrolpumps);
 std::string isBalanced(std::string s);
 
 int pairs(int k, std::vector<int> arr);
+
+int cookies(int k, std::vector<int> A) ;
+
+
