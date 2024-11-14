@@ -4,6 +4,12 @@
 #include <set>
 #include <cctype>
 
+void print_array(std::vector<int> arr) {
+    for (auto entry: arr) {
+        std::cout << "Entry = " << entry << std::endl;
+    }
+}
+
 int median(int size, int* arr) {
     if (size == 1) {
         return arr[0];
@@ -329,5 +335,27 @@ std::string isBalanced(std::string s) {
 
 }
 
+int pairs(int k, std::vector<int> arr) {
+    // a better approach would be to use a set to add unique items
+    // then use the k to find the pairs and map the result to the set
+    // if the result exists then increment the result
 
+    int result = 0;
+
+    for (int i=0; i < arr.size()-1; i++) {
+        for (int j=i+1; j < arr.size(); j++) {
+
+            int diff = arr[i] - arr[j];
+
+            if (diff < 0) {
+                diff *= -1;
+            }
+
+            if (diff == k) {
+                result ++;
+            }
+        }
+    }
+    return result;
+}
 
