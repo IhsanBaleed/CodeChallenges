@@ -63,4 +63,10 @@ int pairs(int k, std::vector<int> arr);
 
 int cookies(int k, std::vector<int> A) ;
 
+int legoBlocks(int n, int m);
+
+std::vector<int> bfs(int n, int m, std::vector<std::vector<int>> edges, int s);
+
+void print_array(std::vector<int> arr);
+
 

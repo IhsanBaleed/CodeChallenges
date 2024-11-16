@@ -3,6 +3,7 @@
 #include <map>
 #include <set>
 #include <cctype>
+#include <numeric>
 
 void print_array(std::vector<int> arr) {
     for (auto entry: arr) {
@@ -403,6 +404,109 @@ int cookies(int k, std::vector<int> A) {
         } else {
             break;
         }
+    }
+
+    return result;
+}
+
+void generateRows(std::vector<std::vector<int>>& rows, std::vector<int>& row, int row_size, int current_sum) {
+    if (current_sum == row_size) {
+            std::vector<int> entry = row;
+            rows.push_back(entry);
+        return;
+    }
+
+    for (int i = 1; i <= 4; ++i) {
+        if (current_sum + i <= row_size) {
+            row.push_back(i);
+            generateRows(rows, row, row_size, current_sum + i);
+            row.pop_back();
+        }
+    }
+}
+
+int legoBlocks(int h, int w) {
+
+    int result = 0;
+    std::vector<std::vector<int>> rows;
+    std::vector<int> row;
+
+    generateRows(rows, row, w ,0);
+
+    if (h==0) {
+        return rows.size();
+    }
+
+    for (int i=0; i<h-1; i++) {
+        int first_row_index = i;
+        int second_row_index = i+1;
+
+        // for (auto top_row) {
+
+        // }
+
+    }
+    
+    
+
+
+    return result;
+}
+
+int search_node(std::vector<std::vector<int>>& edges, int starting_node, int current_node, int target_node, int previous_node, bool& found) {
+
+    int result = 0;
+
+    std::vector<int> adjacent_nodes;
+    for (auto edge : edges) {
+        if (edge[0] == current_node || edge[1] == current_node) {
+            if (edge[0] == target_node || edge[1] == target_node) {
+                found = true;
+                return 6;
+            }
+            if (edge[0] == current_node) { // record adjacent nodes
+                adjacent_nodes.push_back(edge[1]);
+            } else {
+                adjacent_nodes.push_back(edge[0]);
+            }
+        }
+    }
+
+    for (auto node : adjacent_nodes) {
+        if (node == starting_node || node == current_node || node == previous_node) {
+            continue;
+        }
+        for (auto edge : edges) {
+            if (edge[0] == node || edge[1] == node) {
+                int distance = search_node(edges, starting_node, node, target_node, current_node, found);
+                if (found) {
+                    result += distance + 6;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (found)
+        return result;
+
+    return -1;
+}
+
+std::vector<int> bfs(int n, int m, std::vector<std::vector<int>> edges, int s) {
+
+    std::vector<int> result;
+
+    for (int node=1; node <=n; node++) {
+        if (node == s) {
+            continue;
+        }
+
+        bool found = false;
+        int distance = search_node(edges, s, s, node, s, found);
+
+        result.push_back(distance);
+
     }
 
     return result;
