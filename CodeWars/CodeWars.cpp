@@ -24,7 +24,6 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
         return result;
     }
 
-
     bool working = true;
     
     int lhs_index = 0;
@@ -62,4 +61,6 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
 
     return result;
 }
+
+
 
