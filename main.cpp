@@ -1,6 +1,7 @@
 #include "HackerRank.hh"
 #include "StringChallenges.hh"
 #include "Arrays.hh"
+#include "CodeWars.hh"
 
 #include <iostream>
 #include <vector>
@@ -9,23 +10,12 @@
 
 int main() {
 
-    // int result = legoBlocks(2, 3);
 
-    std::vector<std::vector<int>> edges;
+    std::vector<std::vector<int>> v;
+    v = {{1,2,3,4}, {12,13,14,5}, {11,16,15,6}, {10,9,8,7}};
 
-    std::vector<int> edge_1 = {2,3};
-    // std::vector<int> edge_2 = {2,3};
-    // std::vector<int> edge_3 = {2,5};
-    // std::vector<int> edge_4 = {5,6};
+    std::vector<int> result = snail(v);
 
-    edges.push_back(edge_1); 
-    // edges.push_back(edge_2); 
-    // edges.push_back(edge_3);
-    // edges.push_back(edge_4);
-
-    std::vector<int> result = bfs(3, 1, edges, 2);
-
-    print_array(result);
 
     return 0;
 }
