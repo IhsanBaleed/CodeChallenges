@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 int multiple_3_5(int val);
 
@@ -48,4 +49,5 @@ public:
   }
 };
 
+std::string format_duration(int seconds);
 

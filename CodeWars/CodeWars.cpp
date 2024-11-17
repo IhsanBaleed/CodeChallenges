@@ -1,4 +1,6 @@
 #include "CodeWars.hh"
+#include <iostream>
+
 
 int multiple_3_5(int val) {
     if (val < 0) {
@@ -62,5 +64,110 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
     return result;
 }
 
+std::string format_duration(int seconds) {
 
+    std::string result;
+
+    if (seconds == 0) {
+        return "now";
+    }
+
+    int secs = 0;
+    int mins = 0;
+    int hours = 0;
+    int days = 0;
+    int years = 0;
+
+    if (seconds / (3600 * 24 * 365) >= 1) {
+        years = seconds / (3600 * 24 * 365);
+        seconds -= years * (3600 * 24 * 365);
+
+        if (seconds == 0) {
+            if (years > 1)
+                result += std::to_string(years) + " years";
+            else 
+                result += std::to_string(years) + " year";
+        } else {
+            if (years > 1)
+                result += std::to_string(years) + " years";
+            else 
+                result += std::to_string(years) + " year";
+        }
+    }
+
+    if (seconds / (3600 * 24) >= 1) {
+        days = seconds / (3600 * 24);
+        seconds -= days * (3600 * 24);
+
+        if (seconds == 0) {
+            if (!result.empty())
+                result += " and ";
+            if (days > 1)
+                result += std::to_string(days) + " days";
+            else 
+                result += std::to_string(days) + " day";
+        } else {
+            if (!result.empty())
+                result += ", ";
+            if (days > 1)
+                result += std::to_string(days) + " days";
+            else 
+                result += std::to_string(days) + " day";
+        }
+    }
+
+    if (seconds / (3600) >= 1) {
+        hours = seconds / (3600);
+        seconds -= hours * (3600);
+
+        if (seconds == 0) {
+            if (!result.empty())
+                result += " and ";
+            if (hours > 1)
+                result += std::to_string(hours) + " hours";
+            else 
+                result += std::to_string(hours) + " hour";
+        } else {
+            if (!result.empty())
+                result += ", ";
+            if (hours > 1)
+                result += std::to_string(hours) + " hours";
+            else 
+                result += std::to_string(hours) + " hour";
+        }
+    }
+
+    if (seconds / (60) >= 1) {
+        mins = seconds / (60);
+        seconds -= mins * (60);
+
+        if (seconds == 0) {
+            if (!result.empty())
+                result += " and ";
+            if (mins > 1)
+                result += std::to_string(mins) + " minutes";
+            else 
+                result += std::to_string(mins) + " minute";
+        } else {
+            if (!result.empty())
+                result += ", ";
+            if (mins > 1)
+                result += std::to_string(mins) + " minutes";
+            else 
+                result += std::to_string(mins) + " minute";
+        }
+    }
+
+    secs = seconds;
+    if (secs > 0) {
+         if (!result.empty())
+                result += " and ";
+        if (secs > 1)
+            result += std::to_string(seconds) + " seconds";
+        else
+            result += std::to_string(seconds) + " second";
+    }
+
+    return result;
+}
 

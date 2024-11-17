@@ -11,8 +11,7 @@
 int main() {
 
 
-    ProdFib::productFib(4895);
-
+    std::string result = format_duration(120);
 
     return 0;
 }
