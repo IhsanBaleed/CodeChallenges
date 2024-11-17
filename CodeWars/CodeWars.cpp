@@ -171,3 +171,96 @@ std::string format_duration(int seconds) {
     return result;
 }
 
+bool validate_battlefield(std::vector<std::vector<int>> field) {
+
+    int battle_ship = 0;
+    int crusiers = 0;
+    int destoryers = 0;
+    int subs = 0;
+
+    int grid_size = field.size();
+
+    for (int row=0; row < grid_size; row++) {
+        for (int column=0; column < grid_size; column++) {
+
+            int full_cells = 0;
+
+            if(field[row][column] == 1) {
+                full_cells++;
+                field[row][column] = 2;
+
+                if (row-1 >= 0 && column-1 >= 0 &&               field[row-1][column-1] > 0)
+                    return false;
+                if (row-1 >= 0 && column+1 < grid_size &&        field[row-1][column+1] > 0)
+                    return false;
+                if (row+1 < grid_size && column-1 >= 0 &&        field[row+1][column-1] > 0)
+                    return false;
+                if (row+1 < grid_size && column+1 < grid_size && field[row+1][column+1] > 0)
+                    return false;
+
+                for (int i=column+1; i<grid_size; i++) { // check right
+                    if(field[row][i] == 1) {
+                        full_cells++;
+                        field[row][i] = 2;
+
+                        if (row-1 >= 0 && i-1 >= 0 &&               field[row-1][i-1] > 0)
+                            return false;
+                        if (row-1 >= 0 && i+1 < grid_size &&        field[row-1][i+1] > 0)
+                            return false;
+                        if (row+1 < grid_size && i-1 >= 0 &&        field[row+1][i-1] > 0)
+                            return false;
+                        if (row+1 < grid_size && i+1 < grid_size && field[row+1][i+1] > 0)
+                            return false;
+                    }
+                    else 
+                        break;
+                }
+
+                for (int j=row+1; j<grid_size; j++) { // check down
+                    if(field[j][column] == 1) {
+                        full_cells++;
+                        field[j][column] = 2;
+
+                        if (column-1 >= 0 && j-1 >= 0 &&                field[j-1][column-1] > 0)
+                            return false;
+                        if (column+1 < grid_size && j-1 >= 0 &&         field[j-1][column+1] > 0)
+                            return false;
+                        if (column-1 >=0 && j+1 < grid_size &&          field[j+1][column-1] > 0)
+                            return false;
+                        if (j+1 < grid_size && column+1 < grid_size &&  field[j+1][column+1] > 0)
+                            return false;
+                    }
+                    else 
+                        break;
+                }
+
+                switch (full_cells) {
+                    case 4:
+                        battle_ship++;
+                        break;
+                    case 3:
+                        crusiers++;
+                        break;
+                    case 2:
+                        destoryers++;
+                        break;
+                    case 1:
+                        subs++;
+                        break;
+                    case 0:
+                        break;
+                    
+                    default:
+                        return false;
+                        break;
+                    }
+            }
+        }
+    }
+    if (battle_ship == 1 && crusiers == 2 && destoryers == 3 && subs == 4)
+        return true;
+    return false;
+}
+
+
+

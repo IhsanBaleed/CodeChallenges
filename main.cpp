@@ -8,10 +8,9 @@
 #include <cstring>
 
 
+
 int main() {
 
-
-    std::string result = format_duration(120);
 
     return 0;
 }

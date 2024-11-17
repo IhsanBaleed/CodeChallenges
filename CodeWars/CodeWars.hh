@@ -51,3 +51,4 @@ public:
 
 std::string format_duration(int seconds);
 
+bool validate_battlefield(std::vector<std::vector<int>> field);
