@@ -52,3 +52,7 @@ public:
 std::string format_duration(int seconds);
 
 bool validate_battlefield(std::vector<std::vector<int>> field);
+
+std::string encode_rail_fence_cipher(const std::string &str, int n);
+
+std::string decode_rail_fence_cipher(const std::string &str, int n);

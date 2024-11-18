@@ -262,5 +262,115 @@ bool validate_battlefield(std::vector<std::vector<int>> field) {
     return false;
 }
 
+std::string encode_rail_fence_cipher(const std::string &str, int n) {
+  if (str.empty())
+    return "";
 
+    std::string result;
+    std::vector<std::vector<char>> rails;
 
+    for (int i=0; i<n; i++) {
+        std::vector<char> rail;
+        rails.push_back(rail);
+    }
+
+    int rail_pos = 0;
+    bool zig = true;
+    for (auto letter : str) {
+
+        if (rail_pos == n) {
+            zig = false;
+            rail_pos -= 2;
+        }
+        if (rail_pos == 0) {
+                zig = true;
+        }
+        if (zig) {
+            rails[rail_pos].push_back(letter);
+            rail_pos ++;
+        } 
+        if (!zig) {
+            rails[rail_pos].push_back(letter);
+            rail_pos --;
+        }
+    }
+
+    for (auto rail : rails) {
+        for (auto letter : rail) {
+            result += letter;
+        }
+    }
+
+    return result;
+}
+
+std::string decode_rail_fence_cipher(const std::string &str, int n) {
+    if (str.empty())
+        return "";
+
+    std::string result;
+    std::vector<std::vector<char>> rails;
+
+    for (int i=0; i<n; i++) {
+        std::vector<char> rail;
+        rails.push_back(rail);
+    }
+
+    int rail_pos = 0;
+    bool zig = true;
+    for (auto letter : str) {
+
+        if (rail_pos == n) {
+            zig = false;
+            rail_pos -= 2;
+        }
+        if (rail_pos == 0) {
+                zig = true;
+        }
+        if (zig) {
+            rails[rail_pos].push_back('#');
+            rail_pos ++;
+        } 
+        if (!zig) {
+            rails[rail_pos].push_back('#');
+            rail_pos --;
+        }
+    }
+
+    int starting_point = 0;
+    std::vector<int> points;
+    points.push_back(starting_point);
+    for(int i=0; i<rails.size()-1; i++) {
+        starting_point += rails[i].size();
+        points.push_back(starting_point);
+    }
+
+    bool zag = true;
+    rail_pos = 0;
+    while (result.size() < str.size()) {
+        
+        if(rail_pos == n) {
+            zag = false;
+            rail_pos -= 2;
+        }
+        if (rail_pos == 0) {
+            zag = true;
+        }
+        if (zag) {
+            if (points[rail_pos] < str.size()) {
+                result += str.at(points[rail_pos]);
+                points[rail_pos]++;            
+            }
+            rail_pos ++;
+        } 
+        if (!zag) {
+            if (points[rail_pos] < str.size()) {
+                    result += str.at(points[rail_pos]);      
+                    points[rail_pos]++;
+            }
+            rail_pos --;
+        }
+    }
+
+    return result;
+}
