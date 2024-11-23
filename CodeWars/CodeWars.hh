@@ -1,4 +1,5 @@
 #include <vector>
+#include <list>
 #include <string>
 
 int multiple_3_5(int val);
@@ -56,3 +57,7 @@ bool validate_battlefield(std::vector<std::vector<int>> field);
 std::string encode_rail_fence_cipher(const std::string &str, int n);
 
 std::string decode_rail_fence_cipher(const std::string &str, int n);
+
+int last_digit(const std::string &str1, const std::string &str2);
+
+int last_digit(std::list<int> lst);

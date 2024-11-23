@@ -1,5 +1,6 @@
 #include "CodeWars.hh"
 #include <iostream>
+#include <cmath>
 
 
 int multiple_3_5(int val) {
@@ -374,3 +375,31 @@ std::string decode_rail_fence_cipher(const std::string &str, int n) {
 
     return result;
 }
+
+int last_digit(const std::string &str1, const std::string &str2) {
+
+    if (str2 == "0") {
+        return 1;
+    }
+  
+    int base_num = str1.at(str1.size()-1) - '0';
+
+    int power = 0;
+    if (str2.size() > 1) {
+        power = std::stoi(str2.substr(str2.size()-2,2)) % 4;
+    } else {
+        power = std::stoi(str2.substr(str2.size()-1,1)) % 4;
+    }
+
+    if (power == 0) {
+        power += 4;
+    }
+
+    int result =  std::pow(base_num, power);
+
+    result %= 10;
+
+return result;
+}
+
+
