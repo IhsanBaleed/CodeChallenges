@@ -11,6 +11,8 @@
 
 int main() {
 
+    range_extraction({-3,-2,-1,2,10,15,16,18,19,20});
+
     return 0;
 }
 

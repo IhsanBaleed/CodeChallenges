@@ -402,4 +402,57 @@ int last_digit(const std::string &str1, const std::string &str2) {
 return result;
 }
 
+std::string range_extraction(std::vector<int> args) {
+
+    std::string result;
+
+    if (args.size() <= 2) {
+        for (auto& item: args) {
+            result += std::to_string(item);
+            result += ",";
+        }
+        return result;
+    }
+
+    for (int i=0; i<args.size();) {
+        int elements = 0;
+
+        if (i == args.size()-1) {
+            result += std::to_string(args[i]);
+            break;
+        }
+
+        if (args[i] - args[i+1] == -1) {
+            elements+= 2;
+
+            for (int j=i+1; j<args.size()-1; j++) {
+                if (args[j] - args[j+1] == -1) {
+                    elements++;
+                } else {
+                    break;
+                }
+            }
+
+            if (elements >= 3) {
+                result += std::to_string(args[i]);
+                result += "-";
+                result += std::to_string(args[i+elements-1]);
+                i += elements;
+                if (i < args.size())
+                    result += ",";
+                continue;
+            } else {
+                result += std::to_string(args[i]);
+                result += ",";
+                i++;
+            }
+        } else {
+            result += std::to_string(args[i]);
+            result += ",";
+            i++;
+        }
+    }
+
+    return result;
+}
 
