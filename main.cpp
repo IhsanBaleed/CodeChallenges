@@ -11,8 +11,7 @@
 
 int main() {
 
-    range_extraction({-3,-2,-1,2,10,15,16,18,19,20});
-
+    encryption("chillout");
     return 0;
 }
 

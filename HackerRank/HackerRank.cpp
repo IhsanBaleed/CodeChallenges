@@ -4,6 +4,8 @@
 #include <set>
 #include <cctype>
 #include <numeric>
+#include <algorithm>
+#include <cmath>
 
 void print_array(std::vector<int> arr) {
     for (auto entry: arr) {
@@ -512,3 +514,47 @@ std::vector<int> bfs(int n, int m, std::vector<std::vector<int>> edges, int s) {
     return result;
 }
 
+std::string encryption(std::string s) {
+    s.erase(std::remove(s.begin(), s.end(), ' '), s.end());
+
+    int length = s.size();
+    int rows = std::sqrt(length);
+    int columns = rows;
+
+
+    while (rows * columns < length) {
+        columns++;
+
+        if (rows * columns < length)
+            rows++;
+    }
+
+    std::vector<std::vector<char>> table;
+
+    int string_indix = 0;
+    for (int i=0; i<rows && string_indix<length; i++) {
+        std::vector<char> row;
+        for (int j=0; j<columns && string_indix < length; j++, string_indix++) {
+        
+            row.push_back(s.at(string_indix));
+        }
+        table.push_back(row);
+    }
+
+    std::string result;
+
+    for (int column=0, count=0; column < columns && count < length; column++) {
+        for (int row=0; row < rows && count < length; row++) {
+            if (column < table[row].size()) {
+                result += table[row][column];
+                count++;
+            }
+        }
+        if (count == length)
+            break;
+        
+        result += " ";
+    }
+
+    return result;
+}
