@@ -75,3 +75,4 @@ std::vector<int> breakingRecords(std::vector<int> scores);
 
 int migratoryBirds(std::vector<int> arr);
 
+int getMinimumCost(int k, std::vector<int> c);
