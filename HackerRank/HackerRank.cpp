@@ -558,3 +558,48 @@ std::string encryption(std::string s) {
 
     return result;
 }
+
+std::vector<int> breakingRecords(std::vector<int> scores) {
+
+    int best_score = 0;
+    int worst_score = 0;
+
+    int best_count = 0;
+    int worst_count = 0;
+
+    best_score = scores[0];
+    worst_score = best_score;
+
+    for (int i=1; i<scores.size(); i++) {
+        if (scores[i] > best_score) {
+            best_score = scores[i];
+            best_count++;
+        } else if (scores[i] < worst_score) {
+            worst_score = scores[i];
+            worst_count++;
+        }
+    }
+
+    return std::vector<int> {best_count, worst_count};
+}
+
+int migratoryBirds(std::vector<int> arr) {
+
+    std::vector<int> types {0, 0, 0, 0, 0};
+
+    for (int i=0; i<arr.size(); i++) {
+        types[arr[i]-1]++;
+    }
+
+    int max_val = 0;
+    for (auto item: types)
+        if (item > max_val)
+            max_val = item;
+    
+    for (int i=0; i< types.size(); i++) {
+        if (types[i] == max_val)
+            return i+1;
+    }
+    return 0;
+}
+

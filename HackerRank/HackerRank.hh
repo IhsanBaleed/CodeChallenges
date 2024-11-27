@@ -70,3 +70,8 @@ std::vector<int> bfs(int n, int m, std::vector<std::vector<int>> edges, int s);
 void print_array(std::vector<int> arr);
 
 std::string encryption(std::string s);
+
+std::vector<int> breakingRecords(std::vector<int> scores);
+
+int migratoryBirds(std::vector<int> arr);
+
