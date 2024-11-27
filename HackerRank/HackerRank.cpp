@@ -632,4 +632,41 @@ int getMinimumCost(int k, std::vector<int> c) {
     return result;
 }
 
+int minimumNumber(int n, std::string password) {
+    
+    int result = 0;
+    std::string special_characters = "!@#$%^&*()-+";
+
+    bool has_upper = false;
+    bool has_lower = false;
+    bool has_special = false;
+    bool has_digit = false;
+
+    for (auto letter : password) {
+
+        if(!has_upper && std::isupper(letter)) {
+            has_upper = true;
+        } else if(!has_lower && std::islower(letter)) {
+            has_lower = true;
+        } else if (!has_special && std::find(special_characters.begin(), special_characters.end(), letter) != special_characters.end()) {
+            has_special = true;
+        } else if(!has_digit && std::isdigit(letter)) {
+            has_digit = true;
+        }
+    }
+
+    if (!has_lower)
+        result++;
+    if (!has_upper)
+        result++;
+    if (!has_special)
+        result++;
+    if (!has_digit)
+        result++;
+    
+    if (password.size() + result < 6)
+        result += 6 - password.size() - result;
+
+    return result;
+}
 
