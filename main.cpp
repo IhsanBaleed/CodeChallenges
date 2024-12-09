@@ -11,6 +11,11 @@
 
 int main() {
 
+
+    std::vector<int> input = {-1, 3, -1};
+
+    countWaysToCreateWave(input,3);
+
     return 0;
 }
 
