@@ -79,7 +79,7 @@ int getMinimumCost(int k, std::vector<int> c);
 
 int minimumNumber(int n, std::string password);
 
-std::vector<int> minimalOperations(std::vector<std::string> words) {
+inline std::vector<int> minimalOperations(std::vector<std::string> words) {
 
     std::vector<int> result;
 
@@ -96,7 +96,7 @@ std::vector<int> minimalOperations(std::vector<std::string> words) {
     return result;
 }
 
-long getMaximumSumOfStrengths(std::vector<int> arr) {
+inline long getMaximumSumOfStrengths(std::vector<int> arr) {
 
     long result = 0;
 
@@ -134,7 +134,7 @@ long getMaximumSumOfStrengths(std::vector<int> arr) {
     return result;
 }
 
-void generatePermutations(std::vector<int>& arr, int index, int m, std::vector<std::vector<int>>& permutations) {
+void inline generatePermutations(std::vector<int>& arr, int index, int m, std::vector<std::vector<int>>& permutations) {
     if (index == arr.size()) {
         permutations.push_back(arr);
         return;
@@ -151,13 +151,13 @@ void generatePermutations(std::vector<int>& arr, int index, int m, std::vector<s
     }
 }
 
-std::vector<std::vector<int>> getAllPermutations(std::vector<int> arr, int m) {
+inline std::vector<std::vector<int>> getAllPermutations(std::vector<int> arr, int m) {
     std::vector<std::vector<int>> permutations;
     generatePermutations(arr, 0, m, permutations);
     return permutations;
 }
 
-int countWaysToCreateWave(std::vector<int> arr, int m) {
+inline int countWaysToCreateWave(std::vector<int> arr, int m) {
 
     std::vector<std::vector<int>> waves = getAllPermutations(arr, m);
 
@@ -194,4 +194,9 @@ int countWaysToCreateWave(std::vector<int> arr, int m) {
     return result;
 }
 
+std::string kangaroo(int x1, int v1, int x2, int v2);
+
+int sockMerchant(int n, std::vector<int> ar);
+
+std::string timeInWords(int h, int m);
 

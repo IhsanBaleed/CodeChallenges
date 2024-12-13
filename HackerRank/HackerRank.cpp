@@ -670,3 +670,107 @@ int minimumNumber(int n, std::string password) {
     return result;
 }
 
+std::string kangaroo(int x1, int v1, int x2, int v2) {
+
+    while (true) {
+        if (x1 > x2 && v1 >= v2)
+            return "NO";
+        if (x2 > x1 && v2 >= v1)
+            return "NO";
+
+        if (x1 == x2)
+            return "YES";
+
+            x1 += v1;
+            x2 += v2;
+    }
+}
+
+int sockMerchant(int n, std::vector<int> ar) {
+    std::map<int ,int> socks;
+
+    for (auto sock : ar) {
+        auto item = socks.find(sock);
+
+        if (item != socks.end()) {
+            item->second +=1;
+        } else {
+            socks.emplace(sock, 1);
+        }
+    }
+
+    int result = 0;
+
+    for (auto pairs : socks) {
+        result += pairs.second/2;
+    }
+
+    return result;
+}
+
+std::string timeInWords(int h, int m) {
+
+    std::string result;
+
+    std::map<int, std::string> times = {
+        {0, "o' clock"},
+        {1, "one"}, {2, "two"}, {3, "three"},
+        {4, "four"}, {5, "five"}, {6, "six"},
+        {7, "seven"}, {8, "eight"}, {9, "nine"},
+        {10, "ten"}, {11, "eleven"}, {12, "twelve"},
+        {13, "thirteen"}, {14, "fourteen"}, {15, "quarter"},
+        {16, "sixteen"}, {17, "seventeen"}, {18, "eighteen"},
+        {19, "nineteen"}, {20, "twenty"}, {30, "half"}
+    };
+
+    std::string min_suffix = "minute";
+    std::string minute;
+
+    int temp = m;
+    if (m > 30) {
+        temp = 60 - m;
+    }
+
+    if (temp > 1) 
+        min_suffix += "s";
+
+    if (temp <= 20) {
+            minute += times.find(temp)->second;
+    } else  if (temp < 30 ) {
+        minute += times.find(20)->second;
+        if (temp % 10 != 0) {
+            minute += " " + times.find(temp%10)->second;
+        }
+    } else {
+        minute += times.find(30)->second;
+    }
+
+    std::string hour = times.find(h)->second;
+
+    if (m == 0) {
+        result += hour + " " + minute;
+    }  else if (m%15 == 0 && m <= 30) {
+        result += minute + " past " + hour;
+    } else {
+        
+        if (m%15 == 0) {
+            result += minute;
+        } else 
+            result += minute + " " + min_suffix;
+        
+        if (m > 30) {
+            result += " to ";
+            if (h==12)
+                hour = times.find(1)->second;
+            else
+                hour = times.find(h+1)->second;
+        }
+        else 
+            result += " past ";
+     
+        result += hour;
+    }
+
+    return result;
+}
+

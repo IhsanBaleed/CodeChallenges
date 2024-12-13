@@ -11,10 +11,7 @@
 
 int main() {
 
-
-    std::vector<int> input = {-1, 3, -1};
-
-    countWaysToCreateWave(input,3);
+    timeInWords(5, 47);
 
     return 0;
 }
