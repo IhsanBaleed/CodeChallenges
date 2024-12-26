@@ -11,7 +11,7 @@
 
 int main() {
 
-    timeInWords(5, 47);
+    get_pins("369");
 
     return 0;
 }

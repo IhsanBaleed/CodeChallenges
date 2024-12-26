@@ -1,6 +1,7 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <map>
 
 int multiple_3_5(int val);
 
@@ -64,3 +65,4 @@ int last_digit(std::list<int> lst);
 
 std::string range_extraction(std::vector<int> args);
 
+std::vector<std::string> get_pins(std::string observed);

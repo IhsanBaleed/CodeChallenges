@@ -456,3 +456,44 @@ std::string range_extraction(std::vector<int> args) {
     return result;
 }
 
+std::map<std::string, std::vector<std::string>> digits_map {
+    {"0", {"0","8"}},
+    {"1", {"1", "2", "4"}},
+    {"2", {"2", "1", "3", "5"}},
+    {"3", {"3", "2", "6"}},
+    {"4", {"4", "1", "5", "7"}},
+    {"5", {"5", "2", "4", "6", "8"}},
+    {"6", {"6", "3", "5", "9"}},
+    {"7", {"7", "4", "8"}},
+    {"8", {"8", "5", "7", "9", "0"}},
+    {"9", {"9", "6", "8"}}
+};
+
+void generatePermutations(const std::string& input, std::string current, int index, std::vector<std::string>& result) {
+    if (index == input.size()) {
+        result.push_back(current);
+        return;
+    }
+
+    std::string digit = std::string(1, input[index]);
+    if (digits_map.find(digit) != digits_map.end()) {
+        for (const auto& replacement : digits_map[digit]) {
+            generatePermutations(input, current + replacement, index + 1, result);
+        }
+    } else {
+        generatePermutations(input, current + digit, index + 1, result);
+    }
+}
+
+std::vector<std::string> getAllPermutations(const std::string& input) {
+    std::vector<std::string> result;
+    generatePermutations(input, "", 0, result);
+    return result;
+}
+
+std::vector<std::string> get_pins(std::string observed) {
+
+    std::vector<std::string> result = getAllPermutations(observed);
+
+    return result;
+}
