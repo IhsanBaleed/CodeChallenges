@@ -11,7 +11,10 @@
 
 int main() {
 
-    get_pins("369");
+    RomanHelper r;
+
+    r.to_roman(863);
+    r.from_roman("IV");
 
     return 0;
 }
