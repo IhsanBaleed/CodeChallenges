@@ -1,6 +1,7 @@
 #include "CodeWars.hh"
 #include <iostream>
 #include <cmath>
+#include <sstream>
 
 
 int multiple_3_5(int val) {
@@ -498,5 +499,57 @@ std::vector<std::string> get_pins(std::string observed) {
     return result;
 }
 
+int FirstFactorial(int num) {
+  int result = num;
 
+  for (num > 0; --num;) {
+    result *= num;
+  }
+  
+  return result;
+}
+
+void removeSpaces(std::string& str) {
+    std::string result;
+    for (char c : str) {
+        if (c != ' ') {
+            result += c;
+        }
+    }
+    str = result;
+}
+
+std::vector<std::string> splitString(const std::string& str, char delimiter) {
+    std::vector<std::string> result;
+    std::stringstream ss(str);
+    std::string item;
+
+    while (std::getline(ss, item, delimiter)) {
+        removeSpaces(item);
+        result.push_back(item);
+    }
+
+    return result;
+}
+
+std::string FindIntersection(std::string strArr[], int arrLength) {
+
+    std::string result;
+
+    std::vector<std::string> str_1 = splitString(strArr[0], ',');
+    std::vector<std::string> str_2 = splitString(strArr[1], ',');
+
+    for (int i=0; i<str_1.size(); i++) {
+        for (int j=0; j<str_2.size(); j++) {
+            if (str_1[i] == str_2[j]) {
+                result += str_1[i] + ",";
+            }
+        }
+    }
+
+    if (result.at(result.size()-1) == ',')
+        result.erase(result.size()-1);
+
+    return result;
+}
 

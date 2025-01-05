@@ -11,11 +11,12 @@
 
 int main() {
 
-    RomanHelper r;
+    std::string str_1 = "1, 3, 4, 7, 13";
+    std::string str_2 = "1, 2, 4, 13, 15";
 
-    r.to_roman(863);
-    r.from_roman("IV");
-
+    std::string strArr[] = {str_1, str_2};
+ 
+    FindIntersection(strArr, 2);
     return 0;
 }
 

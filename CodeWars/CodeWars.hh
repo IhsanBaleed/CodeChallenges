@@ -199,3 +199,8 @@ public:
     return result;
   }
 };
+
+int FirstFactorial(int num) ;
+
+std::string FindIntersection(std::string strArr[], int arrLength);
+
