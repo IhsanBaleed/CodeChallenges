@@ -178,4 +178,34 @@ int Dominator(std::vector<int> &A) {
     return index;
 }
 
+std::string FormatString(std::string s) {
+    std::string result;
+    
+    std::string triplet;
+    for (int i=0; i< s.size(); i++) {
+        if (std::isalnum(s.at(i))) {
+            triplet += s.at(i);
+        }
+        
+        if (triplet.size() == 3) {
+            result += triplet + " ";
+            triplet.clear();
+        }
+        if (i == s.size()-1) {
+            if (triplet.size() == 2) {
+                result += triplet + " ";
+            } else if (triplet.size() == 1) {
+                result.erase(result.size()-1);
+                triplet = result.at(result.size()-1) + triplet;
+                result.erase(result.size()-1);
+                result += " " + triplet + " ";
+            }
+            
+        }
+    }
+    
+    result.erase(result.size()-1);
+    result += ";";
+    return result;
+}
 

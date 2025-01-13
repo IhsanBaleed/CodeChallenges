@@ -12,9 +12,8 @@
 
 int main() {
 
-    std::vector<int> data {3, 4, 3, 2, 3, -1, 3, 3};
+    FormatString("02-219 8 53 24");
 
-    int r = Dominator(data);
 
     return 0;
 }
