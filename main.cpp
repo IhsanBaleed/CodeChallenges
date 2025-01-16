@@ -3,20 +3,11 @@
 #include "Arrays.hh"
 #include "CodeWars.hh"
 #include "Codility.hh"
-
-#include <iostream>
-#include <vector>
-#include <cstring>
-
+#include "LeetCode.hh"
 
 
 int main() {
 
-    FormatString("02-219 8 53 24");
-
-
     return 0;
 }
-
-
 
