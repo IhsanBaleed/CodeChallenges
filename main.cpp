@@ -8,9 +8,10 @@
 
 int main() {
 
-    std::vector<int> data {3, 1, 2, 3, 6};
+    std::vector<int> P {1, 4, 16};
+    std::vector<int> Q {26, 10, 20};
 
-    CountNonDivisible(data);
+    CountSemiPrimes(26, P, Q);
 
     return 0;
 }

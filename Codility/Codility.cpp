@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <bitset>
 #include <set>
+#include <set>
 
 void print_vector(std::vector<int> &A) {
     for (auto& item : A)
@@ -229,6 +230,78 @@ std::vector<int> CountNonDivisible(std::vector<int>& input) {
             if (y % x != 0)
                 result[j]++;
         }
+    }
+
+    return result;
+}
+
+void removeMinusOnes(std::vector<int>& vec) {
+    vec.erase(std::remove(vec.begin(), vec.end(), -1), vec.end());
+}
+
+std::vector<int> CountSemiPrimes(int N, std::vector<int>& P,std::vector<int>& Q) {
+
+    // you can also use vectors to store primes
+    // and another one to store semis based on primes
+    // use a third vector to make a note of how many semis are at each index
+    // subtract based on the limit to see which how many semis between two limits
+
+    std::vector<int> result(P.size());
+
+    if (N == 1)
+        return result;
+
+    std::vector<int> primes(N-1);
+
+    for (int i=0; i<N; i++)
+        primes[i] = i+2;
+
+    for (int i=0; (i*i) < N; i++) {     // generate primes    
+        
+        int prime = primes[i];
+
+        if (prime == -1)
+            continue;
+
+        int k = prime * prime;
+
+        for (;k <= N; k += prime) {
+            primes[k-2] = -1;
+        }
+    }
+
+    removeMinusOnes(primes);
+
+    for (int i=0; i<P.size(); i++) {
+        int lower = P[i];
+        int upper = Q[i];
+
+        int prime_index = 0;
+        int prime = primes[prime_index];
+
+        while (prime * prime < lower) { // find lowest possible prime
+            prime_index++;
+            prime = primes[prime_index];
+        }
+
+        std::set<int> semis;
+
+        for (; (prime*2) <= upper; prime_index++, prime = primes[prime_index]) {
+            for (auto& val : primes) {
+
+                int semi = prime * val;
+
+                if (semi >= lower && semi <= upper) {
+                    semis.insert(semi);
+                    continue;
+                }
+
+                if (semi > upper)
+                    break;
+
+            }
+        }
+        result[i] = semis.size();
     }
 
     return result;
