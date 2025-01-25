@@ -17,3 +17,6 @@ int Dominator(std::vector<int> &A);
 
 std::string FormatString(std::string s);
 
+std::vector<int> CountNonDivisible(std::vector<int>& input);
+
+

@@ -209,3 +209,29 @@ std::string FormatString(std::string s) {
     return result;
 }
 
+std::vector<int> CountNonDivisible(std::vector<int>& input) {
+
+    // a better approach would be to
+    // count the num of divisors for each number, upto the Num^2
+    // see if they occure in the array, and count them
+    // the rest would be non divisors
+
+    std::vector<int> result(input.size(), 0);
+
+    for (int i=0; i<input.size(); i++) {
+        for (int j=i+1; j<input.size(); j++) {
+            int x = input[i];
+            int y = input[j];
+            if (x == y)
+                continue;
+            if (x % y != 0)
+                result[i]++;
+            if (y % x != 0)
+                result[j]++;
+        }
+    }
+
+    return result;
+}
+
+
