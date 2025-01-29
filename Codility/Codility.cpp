@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <bitset>
 #include <set>
-#include <set>
+#include <stack>
+#include <unordered_map>
 
 void print_vector(std::vector<int> &A) {
     for (auto& item : A)
@@ -307,4 +308,103 @@ std::vector<int> CountSemiPrimes(int N, std::vector<int>& P,std::vector<int>& Q)
     return result;
 }
 
+int Fish(std::vector<int> A, std::vector<int> B) {
+
+    int result = A.size();
+
+    std::stack<std::pair<int, int>> fish;
+
+    for (int i=0; i<A.size(); i++) {
+
+        if (fish.empty()) {
+            fish.push(std::pair(A[i],B[i]));
+            continue;
+        }
+
+        std::pair<int,int> f1 = fish.top();
+        std::pair<int,int> f2 (A[i], B[i]);
+
+        if (f1.second == 1 && f2.second == 0) {
+
+            if (f1.first > f2.first) {
+                result--;
+                continue;
+            } else {
+                fish.pop();
+                result--;
+
+                while (!fish.empty() && fish.top().second == 1) {
+                    if (fish.top().first > f2.first) {
+                        result --;
+                        break;
+                    } else {
+                        fish.pop();
+                        result --;
+                    }
+                }
+
+                if (fish.empty() || fish.top().second == 0) {
+                    fish.push(f2);
+                    continue;
+                }
+            }
+        } else {
+            fish.push(f2);
+        }
+    }
+
+    return result;
+}
+
+int highest_num(std::unordered_map<int,int> map, int& amount) {
+    int num = 0;
+    int highest_occurance = 0;
+
+    for (auto& pair : map) {
+        if (pair.second > highest_occurance) {
+            highest_occurance = pair.second;
+            num = pair.first;
+        }
+    }
+
+    amount = highest_occurance;
+    return num;
+}
+
+int EquiLeader(std::vector<int>& A) {
+
+    if (A.size() == 1)
+        return 0;
+    
+    int result = 0;
+
+    std::unordered_map<int, int> lhs;
+    std::unordered_map<int, int> rhs;
+
+    for (int i=0; i<A.size(); i++)
+        rhs[A[i]]++;
+
+    for (int i=0; i<A.size()-1; i++) {
+        lhs[A[i]]++;
+        rhs[A[i]]--;
+
+        int lhs_occur = 0;
+        int lhs_leader = highest_num(lhs, lhs_occur);
+
+        if (lhs_occur > (i+1)/2) {
+
+            int rhs_occur = 0;
+            int rhs_leader = highest_num(rhs, rhs_occur);
+
+            if (rhs_leader != lhs_leader)
+                continue;
+            if (rhs_occur <= (A.size()-1-i)/2)
+                continue;
+            
+            result++;
+        }
+    }
+
+    return result;
+}
 

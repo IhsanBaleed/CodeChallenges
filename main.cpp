@@ -8,10 +8,9 @@
 
 int main() {
 
-    std::vector<int> P {1, 4, 16};
-    std::vector<int> Q {26, 10, 20};
+    std::vector<int> data {4, 3, 4, 4, 4, 2};
 
-    CountSemiPrimes(26, P, Q);
+    EquiLeader(data);
 
     return 0;
 }

@@ -20,3 +20,7 @@ std::string FormatString(std::string s);
 std::vector<int> CountNonDivisible(std::vector<int>& input);
 
 std::vector<int> CountSemiPrimes(int N, std::vector<int>& P,std::vector<int>& Q);
+
+int Fish(std::vector<int> A, std::vector<int> B);
+
+int EquiLeader(std::vector<int>& A);
