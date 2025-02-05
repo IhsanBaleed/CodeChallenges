@@ -8,10 +8,8 @@
 
 int main() {
 
-    std::vector<int> data {4, 3, 4, 4, 4, 2};
-
-    EquiLeader(data);
-
+    CountFacotrs(4);
+    
     return 0;
 }
 

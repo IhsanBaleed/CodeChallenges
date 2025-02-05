@@ -5,6 +5,7 @@
 #include <set>
 #include <stack>
 #include <unordered_map>
+#include <cmath>
 
 void print_vector(std::vector<int> &A) {
     for (auto& item : A)
@@ -406,5 +407,32 @@ int EquiLeader(std::vector<int>& A) {
     }
 
     return result;
+}
+
+int CountFacotrs(int n) {
+
+    std::set<int> factors;
+
+    factors.emplace(n);
+    factors.emplace(1);
+
+    int root = std::sqrt(n);
+
+    for (int i=2; i<= root; i++) {
+
+        if (factors.find(i) != factors.end())
+            continue;
+
+        int factor = i;
+
+        while (n % factor == 0 && factor <= root) {
+            factors.emplace(factor);
+            factors.emplace(n/factor);
+            factor += i;
+        }
+
+    }
+
+    return factors.size();
 }
 
