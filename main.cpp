@@ -8,8 +8,11 @@
 
 int main() {
 
-    CountFacotrs(4);
-    
+    const char* str1 = "abc";
+    const char* str2 = "1234567";
+
+    test_char_ptr(str1, str2);
+
     return 0;
 }
 

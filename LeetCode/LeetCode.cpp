@@ -1,5 +1,6 @@
 #include "LeetCode.hh" 
 #include <set>
+#include <string>
 
 
 bool isValidSudoku(std::vector<std::vector<char>>& board) {
@@ -56,5 +57,68 @@ bool isValidSudoku(std::vector<std::vector<char>>& board) {
 
 
     return true;
+}
+
+Node* mergeTwoLists( Node* list1, Node* list2 ) {
+
+  Node* root = new Node(); // you can also allocate the root on the stack (use normal Node object)
+                           // then have the curr point to its next and iterate
+                           // make sure to return root->next in that case
+  Node* curr = root;
+  
+  while (list1 != nullptr || list2 != nullptr ) {
+    
+    if (list1 == nullptr) {
+      curr->next = new Node(list2->val);
+      curr = curr->next;
+      list2 = list2->next;
+      continue;
+    }
+    if (list2 == nullptr) {
+      curr->next = new Node(list1->val);
+      curr = curr->next;
+      list1 = list1->next;
+      continue;
+    }
+    if (list1->val < list2->val) {
+      curr->next = new Node(list1->val);
+      curr = curr->next;
+      list1 = list1->next;
+      continue;
+    } else {
+      curr->next = new Node(list2->val);
+      curr = curr->next;
+      list2 = list2->next;
+      continue;
+    }
+  }
+
+  curr = root->next;
+  delete root;
+
+  return curr;
+}
+
+void test_char_ptr(const char* str1, const char* str2) {
+
+    std::string res;
+
+    int i=0; // if i goes out of bounds for an array
+             // then we might access garbage values
+             // if i is set to size, then we get null terminator '\0'
+
+    while (str1[i] != '\0' || str2[i] != '\0') {
+        char l1(str1[i]); 
+        char l2(str2[i]);
+
+        if (str1[i] == '\0') {
+            break;
+        }
+
+        res += l1 + l2;
+        
+        i++;
+    }
+    
 }
 

@@ -435,4 +435,3 @@ int CountFacotrs(int n) {
 
     return factors.size();
 }
-
