@@ -160,7 +160,7 @@ int ware_house_locations(int stores, int* locations, long d) {
 }
 
 
-bool empty_map(std::map<char, uint>& map) {
+bool empty_map(std::map<char, std::size_t>& map) {
 
     for (auto item : map) {
         if (item.second > 0) { return false; }
