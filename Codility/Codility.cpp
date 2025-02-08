@@ -435,3 +435,23 @@ int CountFacotrs(int n) {
 
     return factors.size();
 }
+
+int PassingCars(std::vector<int>& Cars) {
+
+    long long result = 0;
+
+    int going_east = 0;
+
+    for (auto& car : Cars) {
+        if (car == 0)
+            going_east++;
+        else {
+            result += going_east;
+        }
+    }
+
+    if (result > 1000000000)
+        return -1;
+
+    return result;
+}

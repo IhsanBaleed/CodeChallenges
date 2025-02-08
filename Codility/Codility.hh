@@ -27,3 +27,4 @@ int EquiLeader(std::vector<int>& A);
 
 int CountFacotrs(int n);
 
+int PassingCars(std::vector<int>& Cars);
