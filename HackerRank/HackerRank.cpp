@@ -2,10 +2,15 @@
 
 #include <map>
 #include <set>
+#include <queue>
 #include <cctype>
 #include <numeric>
 #include <algorithm>
 #include <cmath>
+#include <vector>
+#include <string>
+#include <unordered_set>
+#include <unordered_map>
 
 void print_array(std::vector<int> arr) {
     for (auto entry: arr) {
@@ -774,3 +779,162 @@ std::string timeInWords(int h, int m) {
     return result;
 }
 
+std::string reachTheEnd(std::vector<std::string> grid, int maxTime) {
+
+    int rows = grid.size();
+    int cols = grid[0].size();
+
+    // we can move in 4 possible directions
+    std::vector<std::vector<int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
+
+    // this will help our bfs approach
+    std::queue<std::pair<int, int>> q;
+
+    // this maps is a 1-1 of what we have visited
+    std::vector<std::vector<bool>> visited(rows, std::vector<bool>(cols, false));
+
+    q.push({ 0, 0 }); // add the starting point
+    visited[0][0] = true;
+    int time = 0;
+
+    while (!q.empty()) {
+        int size = q.size();
+        
+        for (int i = 0; i < size; ++i) { // iterate over all valid points
+            auto [x, y] = q.front();
+            q.pop();
+
+            if (x == rows - 1 && y == cols - 1) { // if we have reached the end
+                return time <= maxTime ? "Yes" : "No";
+            }
+
+            for (const auto& dir : directions) { // for every point, there are 4 possible directions
+                int newX = x + dir[0];
+                int newY = y + dir[1];
+
+                if (newX >= 0 && newX < rows && newY >= 0 && newY < cols && !visited[newX][newY] && grid[newX][newY] == '.') {
+                    // the direciton has to be valid
+                    
+                    q.push({ newX, newY }); // add the new coordinate
+                    visited[newX][newY] = true; // mark it as visited
+                }
+            }
+        }
+        ++time; // every iteration counts as a time
+    }
+
+    return "No";
+}
+
+int getMinimumTime(std::vector<int> processSize, std::vector<int> capacity) {
+
+    std::sort(processSize.begin(), processSize.end());
+    std::sort(capacity.begin(), capacity.end());
+
+    int biggest_cap = capacity.size()-1;
+    int biggest_process = processSize.size() - 1;
+
+    if (capacity[biggest_cap] < processSize[biggest_process])
+        return -1;
+
+    int time = 0;
+
+    int num_of_processes = processSize.size();
+    int processed = 0;
+
+    while (processed < num_of_processes) {
+
+        int process_index = processSize.size()-1;
+
+        time++;
+
+        for (int i = biggest_process;(i >= 0 && process_index >= 0 && processSize.size() > 0); process_index--) {
+
+            if (capacity[i] >= processSize[process_index]) {
+                i--;
+                processSize.erase(processSize.begin() + process_index);
+                processed++;
+            }
+        }
+
+        if (processed == num_of_processes)
+            return time;
+
+        time++;
+    }
+}
+
+int longestChain(std::vector<std::string>& words) {
+    std::unordered_set<std::string> wordSet(words.begin(), words.end());
+    std::unordered_map<std::string, int> dp;
+    int longest = 1;
+
+    std::sort(words.begin(), words.end(), [](const std::string& a, const std::string& b) {
+        return a.size() < b.size();
+        });
+
+    for (const std::string& word : words) {
+        dp[word] = 1; 
+        for (int i = 0; i < word.size(); ++i) {
+            std::string newWord = word.substr(0, i) + word.substr(i + 1);
+            if (wordSet.find(newWord) != wordSet.end()) {
+                dp[word] = std::max(dp[word], dp[newWord] + 1);
+            }
+        }
+        longest = std::max(longest, dp[word]);
+    }
+
+    return longest;
+}
+
+
+
+//int getMinimumTime(std::vector<int> processSize, std::vector<int> capacity) {
+//
+//    int res = 0;
+//
+//    std::sort(processSize.begin(), processSize.end());
+//    std::sort(capacity.begin(), capacity.end());
+//
+//    int biggest_cap = capacity.size() - 1;
+//    int biggest_process = processSize.size() - 1;
+//
+//    if (capacity[biggest_cap] < processSize[biggest_process])
+//        return -1;
+//
+//    int cap_index = biggest_cap;
+//
+//    while (!processSize.empty()) {
+//
+//        int process_index = processSize.size() - 1;
+//
+//        for (int i = cap_index; i >= -1;) {
+//
+//            if (i < 0) { // all processors are occupied
+//                res += 2;
+//                break;
+//            }
+//
+//            if (capacity[i] >= processSize[process_index]) {
+//                i--;
+//                processSize.erase(processSize.begin() + process_index);
+//                process_index--;
+//            }
+//            else {
+//                process_index--;
+//            }
+//
+//            if (processSize.empty()) {
+//                res += 1;
+//                break;
+//            }
+//
+//            if (process_index < 0) { // we ran out of processors
+//                res += 2;
+//                break;
+//            }
+//        }
+//    }
+//
+//    return res;
+//}
