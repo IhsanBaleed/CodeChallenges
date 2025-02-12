@@ -28,3 +28,9 @@ int EquiLeader(std::vector<int>& A);
 int CountFacotrs(int n);
 
 int PassingCars(std::vector<int>& Cars);
+
+std::vector<int> GenomicRangeQuery(std::string& S, std::vector<int>& P, std::vector<int>& Q);
+
+int CountDiv(int A, int B, int K);
+
+int MinAvgTwoSlice(std::vector<int>& A);

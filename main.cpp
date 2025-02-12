@@ -10,6 +10,10 @@
 int main() {
 
 
+    std::vector<int> data{4, 2, 2, 5, 1, 5, 8};
+
+    MinAvgTwoSlice(data);
+
     return 0;
 }
 

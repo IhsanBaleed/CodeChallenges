@@ -6,6 +6,8 @@
 #include <stack>
 #include <unordered_map>
 #include <cmath>
+#include <limits>
+
 
 void print_vector(std::vector<int> &A) {
     for (auto& item : A)
@@ -454,4 +456,105 @@ int PassingCars(std::vector<int>& Cars) {
         return -1;
 
     return result;
+}
+
+std::vector<int> GenomicRangeQuery(std::string& S, std::vector<int>& P, std::vector<int>& Q) {
+
+    std::vector<int> res;
+
+    // make the prefix sum arrays, make each one unique to its data type
+    std::vector<int> a_data(S.size() + 1, 0);
+    std::vector<int> c_data(S.size() + 1, 0);
+    std::vector<int> g_data(S.size() + 1, 0);
+    std::vector<int> t_data(S.size() + 1, 0);
+
+    for (int i = 0; i < S.size(); i++) {
+
+        a_data[i + 1] = a_data[i]; // let the arrays retain records of what came before
+        c_data[i + 1] = c_data[i];
+        g_data[i + 1] = g_data[i];
+        t_data[i + 1] = t_data[i];
+
+        if (S[i] == 'A') { // record the data into its respective array
+            a_data[i + 1]++;
+        }
+        else if (S[i] == 'C') {
+            c_data[i + 1]++;
+        }
+        else if (S[i] == 'G') {
+            g_data[i + 1]++;
+        }
+        else if (S[i] == 'T') {
+            t_data[i + 1]++;
+        }
+    }
+
+    for (int i = 0; i < P.size(); i++) {
+
+        int start = P[i];
+        int end = Q[i];
+
+        if (a_data[end + 1] - a_data[start] > 0) { // we have an A
+            res.push_back(1);
+        }
+        else if (c_data[end + 1] - c_data[start] > 0) { // we have a B
+            res.push_back(2);
+        }
+        else if (g_data[end + 1] - g_data[start] > 0) { // we have a C
+            res.push_back(3);
+        }
+        else if (t_data[end + 1] - t_data[start] > 0) { // we have a D
+            res.push_back(4);
+        }
+    }
+
+    return res;
+}
+
+int CountDiv(int A, int B, int K) {
+
+    int res = 0;
+
+    int remainder = A % K;
+
+    int first_factor = A;
+
+    if (remainder != 0)
+        first_factor = K + (A - remainder);
+    if (first_factor > B)
+        return 0;
+
+    res = (B - first_factor) / K;
+    res++;
+
+    return res;
+}
+
+int MinAvgTwoSlice(std::vector<int>& A) {
+
+    // pay attention to the problem's statement
+    // to have a good solution, you must have a correct and thurough understanding of the issue.
+
+    int index = 0;
+    int lowest_sum = std::numeric_limits<int>::max();
+
+    for (int i = 0; i < A.size() - 1; i++) {
+
+        double slice_sum = (A[i] + A[i + 1]) / 2.0; // add .0 to make the devision fully for doubles
+
+        if (slice_sum < lowest_sum) {
+            lowest_sum = slice_sum;
+            index = i;
+        }
+
+        if (i < A.size() - 2) {
+            slice_sum = (A[i] + A[i + 1] + A[i + 2]) / 3.0;
+            if (slice_sum < lowest_sum) {
+                lowest_sum = slice_sum;
+                index = i;
+            }
+        }
+    }
+
+    return index;
 }

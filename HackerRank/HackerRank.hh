@@ -206,4 +206,3 @@ std::string reachTheEnd(std::vector<std::string> grid, int maxTime);
 int getMinimumTime(std::vector<int> processSize, std::vector<int> capacity);
 
 int longestChain( std::vector<std::string>& words);
-
