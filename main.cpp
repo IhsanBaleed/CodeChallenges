@@ -10,9 +10,9 @@
 int main() {
 
 
-    std::vector<int> data{4, 2, 2, 5, 1, 5, 8};
+    std::vector<int> data{1, 5, 2, 1, 4, 0};
 
-    MinAvgTwoSlice(data);
+    NumberOfDistincsIntersections(data);
 
     return 0;
 }

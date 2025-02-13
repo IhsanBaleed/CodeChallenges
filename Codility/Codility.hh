@@ -34,3 +34,5 @@ std::vector<int> GenomicRangeQuery(std::string& S, std::vector<int>& P, std::vec
 int CountDiv(int A, int B, int K);
 
 int MinAvgTwoSlice(std::vector<int>& A);
+
+int NumberOfDistincsIntersections(std::vector<int>& A);

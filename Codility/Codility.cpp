@@ -558,3 +558,45 @@ int MinAvgTwoSlice(std::vector<int>& A) {
 
     return index;
 }
+
+int NumberOfDistincsIntersections(std::vector<int>& A){
+
+    // The solution for this requires a little bit of observation
+    // look at the graph, it shows a better representation of the problem
+
+    using namespace std;
+
+    int N = A.size();
+    if (N < 2) return 0; // No possible intersections
+
+    vector<long> left(N), right(N);
+
+    for (int i = 0; i < N; i++) {
+        left[i] = (long)i - A[i];  // starting of a circle
+        right[i] = (long)i + A[i]; // end of a circle
+    }
+
+    sort(left.begin(), left.end());
+    sort(right.begin(), right.end());
+
+    int intersections = 0;
+    int j = 0; // Pointer for left array
+    int active_discs = 0;
+
+    // Sweep line algorithm
+    // You simply line up the opening archs of each disc, and you start accumelating them
+    // Every time an arch closes, we close a disc
+    // It is very similar to the passing Cars problem
+    for (int i = 0; i < N; i++) {
+        while (j < N && left[j] <= right[i]) { // as long as we have an opening, keep increasing the discs
+            intersections += active_discs;
+            active_discs++;
+            j++;
+            if (intersections > 10'000'000) return -1;
+        }
+        active_discs--; // Close current disc
+    }
+
+    return intersections;
+}
+
