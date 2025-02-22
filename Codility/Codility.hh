@@ -36,3 +36,5 @@ int CountDiv(int A, int B, int K);
 int MinAvgTwoSlice(std::vector<int>& A);
 
 int NumberOfDistincsIntersections(std::vector<int>& A);
+
+int StoneWall(std::vector<int>& H);

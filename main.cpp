@@ -10,9 +10,7 @@
 int main() {
 
 
-    std::vector<int> data{1, 5, 2, 1, 4, 0};
 
-    NumberOfDistincsIntersections(data);
 
     return 0;
 }

@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <cmath>
 #include <limits>
+#include <stack>
 
 
 void print_vector(std::vector<int> &A) {
@@ -598,5 +599,40 @@ int NumberOfDistincsIntersections(std::vector<int>& A){
     }
 
     return intersections;
+}
+
+int StoneWall(std::vector<int> &H) {
+
+    int res = 0;
+    std::stack<int> stones;
+
+    for (auto& h : H) {
+
+        if (stones.empty()) {
+            stones.push(h);
+            res++;
+        } 
+        else if (stones.top() < h) {
+            stones.push(h);
+            res++;
+        } 
+        else if (stones.top() > h) {
+
+            while (!stones.empty() && stones.top() > h)
+                stones.pop();
+            
+            if (!stones.empty()) {
+                if (stones.top() < h) {
+                    stones.push(h);
+                    res++;
+                }
+            }
+            else {
+                stones.push(h);
+                res++;
+            }
+        }
+    }
+    return res;
 }
 
