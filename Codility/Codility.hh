@@ -13,8 +13,6 @@ int PermMissingElem(std::vector<int> &A);
 
 int ChocByNumbers(int N, int M);
 
-int Dominator(std::vector<int> &A);
-
 std::string FormatString(std::string s);
 
 std::vector<int> CountNonDivisible(std::vector<int>& input);
@@ -38,3 +36,6 @@ int MinAvgTwoSlice(std::vector<int>& A);
 int NumberOfDistincsIntersections(std::vector<int>& A);
 
 int StoneWall(std::vector<int>& H);
+
+int Dominator(std::vector<int>& A);
+

@@ -8,6 +8,7 @@
 #include <cmath>
 #include <limits>
 #include <stack>
+#include <map>
 
 
 void print_vector(std::vector<int> &A) {
@@ -133,55 +134,6 @@ int ChocByNumbers(int N, int M) {
     }
 
     return result;
-}
-
-int Dominator(std::vector<int> &A) {
-
-    int count = 0;
-    int item = 0;
-    int index = -1;
-
-    bool found = false;
-
-    if (A.size() > 0) {
-
-        std::vector<int> sorted_array(A);
-
-        std::sort(sorted_array.begin(), sorted_array.end());
-
-        item = sorted_array[0];
-        count ++;
-
-        for (int i=1; i<sorted_array.size(); i++) {
-
-            if (item == sorted_array[i]) {
-                count ++;
-            } else {
-                item = sorted_array[i];
-                count = 1;
-            }
-
-            if (count > A.size()/2) {
-                found = true;
-                break;
-            }
-
-            if (i > A.size()/2 && count < A.size()/2)
-                break;
-        }
-
-    }
-
-    if (found) {
-        for (int i=0; i<A.size(); i++) {
-            if (item == A[i]) {
-                index = i;
-                break;
-            }
-        }
-    }
-
-    return index;
 }
 
 std::string FormatString(std::string s) {
@@ -634,5 +586,27 @@ int StoneWall(std::vector<int> &H) {
         }
     }
     return res;
+}
+
+int Dominator(std::vector<int>& A) {
+
+    if (A.size() == 1)
+        return 0;
+
+    std::map<int, int> matrix;
+    int threshhold = (A.size() / 2) + 1;
+
+    for (int i = 0; i<A.size(); i++) {
+        if (matrix.find(A[i]) == matrix.end())
+            matrix[A[i]]++;
+        else {
+            matrix[A[i]]++;
+            if (matrix[A[i]] >= threshhold) {
+                return i;
+            }
+        }
+    }
+
+    return -1;
 }
 
