@@ -39,3 +39,4 @@ int StoneWall(std::vector<int>& H);
 
 int Dominator(std::vector<int>& A);
 
+int MaxProft(std::vector<int>& A);

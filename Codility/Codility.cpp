@@ -610,3 +610,23 @@ int Dominator(std::vector<int>& A) {
     return -1;
 }
 
+int MaxProft(std::vector<int>& A) {
+
+    if (A.size() < 2) {
+        return 0; // No profit can be made with less than 2 elements
+    }
+
+    long result = 0;
+    long seg_profit = 0;
+    long zero = 0;
+
+    for (long i = 0; i<A.size()-1; i++) {
+
+        long profit = A[i + 1] - A[i];
+
+        seg_profit = std::max(zero, seg_profit + profit);
+        result = std::max(result, seg_profit);
+    }
+
+    return result;
+}
