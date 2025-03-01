@@ -630,3 +630,29 @@ int MaxProft(std::vector<int>& A) {
 
     return result;
 }
+
+int MaxSliceSum(std::vector<int>& A) {
+
+    if (A.size() == 1)
+        return A[0];
+    
+    std::vector<int> prefix_sum(A.size()+1, 0);
+
+    int max_val = 0;
+    for (int i = 0; i < A.size(); i++) {
+
+        int slice = prefix_sum[i] + A[i];
+
+        prefix_sum[i + 1] = std::max(0, slice);
+
+        max_val = std::max(max_val, prefix_sum[i + 1]);
+    }
+
+    if (max_val > 0)
+        return max_val;
+    else {
+        std::sort(A.begin(), A.end());
+        return A[A.size() - 1];
+    }
+}
+
