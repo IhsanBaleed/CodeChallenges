@@ -16,27 +16,6 @@ void print_vector(std::vector<int> &A) {
         std::cout << item << ", " << std::endl; 
 }
 
-int MaxDoubleSliceSum(std::vector<int> &A) {
-    int N = A.size();
-    std::vector<int> max_ending_here(N, 0);
-    std::vector<int> max_starting_here(N, 0);
-
-    for (int i = 1; i < N - 1; ++i) {
-        max_ending_here[i] = std::max(0, max_ending_here[i - 1] + A[i]);
-    }
-
-    for (int i = N - 2; i > 0; --i) {
-        max_starting_here[i] = std::max(0, max_starting_here[i + 1] + A[i]);
-    }
-
-    int max_double_slice_sum = 0;
-    for (int Y = 1; Y < N - 1; ++Y) {
-        max_double_slice_sum = std::max(max_double_slice_sum, max_ending_here[Y - 1] + max_starting_here[Y + 1]);
-    }
-
-    return max_double_slice_sum;
-}
-
 int OddOccurenceaInArray(std::vector<int> &A) {
     
     std::sort(A.begin(), A.end());
@@ -654,5 +633,32 @@ int MaxSliceSum(std::vector<int>& A) {
         std::sort(A.begin(), A.end());
         return A[A.size() - 1];
     }
+}
+
+int MaxDoubleSliceSum(std::vector<int>& A) {
+
+    int N = A.size();
+    if (N < 3) return 0;
+
+    std::vector<int> max_ending_here(N, 0);
+    std::vector<int> max_starting_here(N, 0);
+
+    for (int i = 1; i < N - 1; ++i) {
+        max_ending_here[i] = std::max(0, max_ending_here[i - 1] + A[i]);
+    }
+
+    for (int i = N - 2; i > 0; --i) {
+        max_starting_here[i] = std::max(0, max_starting_here[i + 1] + A[i]);
+    }
+
+    // the two slices must be adjacent, thus we take the two maximum slices we can get.
+    // This is a key information you did not see, it would have solved the issue.
+    // it also links to the creation of the two arrays at the top.
+    int max_double_slice_sum = 0;
+    for (int Y = 1; Y < N - 1; ++Y) {
+        max_double_slice_sum = std::max(max_double_slice_sum, max_ending_here[Y - 1] + max_starting_here[Y + 1]);
+    }
+
+    return max_double_slice_sum;
 }
 
