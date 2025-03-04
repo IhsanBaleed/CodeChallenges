@@ -44,3 +44,6 @@ int MaxProft(std::vector<int>& A);
 int MaxSliceSum(std::vector<int>& A);
 
 int MinPermiterRectangle(int N);
+
+int Flags(std::vector<int>& A);
+

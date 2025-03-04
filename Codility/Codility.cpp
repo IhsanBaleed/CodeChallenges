@@ -9,6 +9,7 @@
 #include <limits>
 #include <stack>
 #include <map>
+#include <vector>
 
 
 void print_vector(std::vector<int> &A) {
@@ -702,3 +703,48 @@ int MinPermiterRectangle(int N) {
 
     return (l + w) * 2;
 }
+
+int Flags(std::vector<int> &A) {
+    int N = A.size();
+    if (N < 3) return 0;  // Not enough elements for peaks
+
+    std::vector<int> peaks;
+
+    // Step 1: Find all peak indices
+    for (int i = 1; i < N - 1; i++) {
+        if (A[i] > A[i - 1] && A[i] > A[i + 1]) {
+            peaks.push_back(i);
+        }
+    }
+
+    // for best performance, use binary search to find the max flags possible
+    int numPeaks = peaks.size();
+    if (numPeaks == 0) return 0; // No peaks, no flags can be placed
+
+    // Step 2: Binary search for the maximum number of flags
+    int left = 1, right = numPeaks, result = 0;
+
+    while (left <= right) {
+        int K = (left + right) / 2;  // Midpoint of binary search
+        int used = 1, lastFlag = peaks[0];
+
+        // Try placing K flags
+        for (int i = 1; i < numPeaks && used < K; i++) {
+            if (peaks[i] >= lastFlag + K) {
+                used++;
+                lastFlag = peaks[i];
+            }
+        }
+
+        if (used >= K) {  // We managed to place K flags
+            result = K;
+            left = K + 1;
+        }
+        else {
+            right = K - 1;
+        }
+    }
+
+    return result;
+}
+
