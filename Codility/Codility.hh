@@ -47,3 +47,5 @@ int MinPermiterRectangle(int N);
 
 int Flags(std::vector<int>& A);
 
+int Peaks(std::vector<int>& A);
+

@@ -748,3 +748,70 @@ int Flags(std::vector<int> &A) {
     return result;
 }
 
+std::vector<int> get_factors(int num, int limit) {
+    std::vector<int> factors;
+
+    for (int i = limit; i >= 2; i--)
+        if (num % i == 0)
+            factors.push_back(i);
+        
+    return factors;
+}
+
+int Peaks(std::vector<int>& A) {
+
+    if (A.size() < 3)
+        return 0;
+
+    std::vector<int> peaks;
+
+    for (int i = 1; i < A.size() - 1; i++)
+        if (A[i] > A[i-1] && A[i] > A[i+1])
+            peaks.push_back(i);
+
+    if (peaks.size() == 0)
+        return 0;
+
+    if (peaks.size() == 1)
+        return 1;
+
+    std::vector<int> factors = get_factors(A.size(), peaks.size());
+
+    if (factors.size() == 0) // covers prime sizes
+        return 1;
+
+    if (factors.size() == 1 && factors[0] == A.size()) // covers prime sizes
+        return 1;
+
+
+    for (auto& factor : factors) {
+
+        int chunk_size = A.size() / factor;
+
+        int start = 0;
+        int end = chunk_size - 1;
+
+        for (auto& peak : peaks) {
+
+            if (peak >= start && peak <= end) { // this chunk has a peak
+                
+                if (end == A.size() - 1) // last chunk
+                    return factor;
+
+                start += chunk_size;
+                end += chunk_size;
+                continue;
+            }
+            else if (peak < start) {
+                continue;
+            }
+            else { // peak > end
+                break;
+            }
+        }
+    }
+    return 1;
+}
+
+
+
