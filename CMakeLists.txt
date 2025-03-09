@@ -12,6 +12,8 @@ add_subdirectory(Arrays)
 add_subdirectory(CodeWars)
 add_subdirectory(Codility)
 add_subdirectory(LeetCode)
+add_subdirectory(NBBO)
+add_subdirectory(SandBox)
 
 
 add_executable(Challenge main.cpp)
@@ -21,5 +23,7 @@ target_link_libraries(Challenge PUBLIC HackerRank
                                        Arrays
                                        CodeWars
                                        Codility
-                                       LeetCode)
+                                       LeetCode
+                                       NBBO
+                                       SandBox)
 

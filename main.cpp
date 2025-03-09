@@ -4,14 +4,12 @@
 #include "CodeWars.hh"
 #include "Codility.hh"
 #include "LeetCode.hh"
-
-
+#include "NBBO/NBBO.hh"
+#include "SandBox/SandBox.hh"
 
 int main() {
 
-    std::vector<int> data{1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
-
-    Peaks(data);
+    nbbo_driver_code();
 
     return 0;
 }
